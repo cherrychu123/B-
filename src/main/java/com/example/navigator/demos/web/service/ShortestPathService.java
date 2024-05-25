@@ -61,29 +61,48 @@ public class ShortestPathService {
             }
             for (Map.Entry<String, Integer> neighbor : neighbors.entrySet()) {
                 int alt = distances.get(smallest) + neighbor.getValue();
-                if (alt < distances.get(neighbor.getKey())) {
+                // 获取到达相邻节点的当前最短距离
+                Integer currentDistance = distances.get(neighbor.getKey());
+
+                // 如果当前最短距离为 null 或者新路径更短，则更新最短距离并添加相邻节点到待处理节点队列中
+                if (currentDistance == null || alt < currentDistance) {
+                    // 更新到达相邻节点的最短距离
                     distances.put(neighbor.getKey(), alt);
                     previousNodes.put(neighbor.getKey(), smallest);
                     nodes.add(neighbor.getKey());
                 }
+               /* if (alt < distances.get(neighbor.getKey())) {
+                    distances.put(neighbor.getKey(), alt);
+                    previousNodes.put(neighbor.getKey(), smallest);
+                    nodes.add(neighbor.getKey());
+                }*/
             }
         }
+        System.out.println("Finding shortest path from " + startRoom + " to " + endRoom);
 
         return Collections.emptyList();  // No path found
     }
 
     public static void main(String[] args) {
+        String fileName = "D:\\ChengYushuo\\2024-1\\Software Modeling Techniques\\B-routing\\Navigator\\src\\main\\resources\\classroom_data.json";
+        System.out.println("Loading adjacency list from file: " + fileName);
         Map<String, Map<String, Integer>> classroomAdjacencyList = JsonReader.readFromJsonFile("D:\\ChengYushuo\\2024-1\\Software Modeling Techniques\\B-routing\\Navigator\\src\\main\\resources\\classroom_data.json");
-        if (classroomAdjacencyList == null) {
+        if (classroomAdjacencyList == null)
             System.out.println("Failed to load adjacency list from JSON file.");
-            return;
-        }
+        else
+            System.out.println("Loaded adjacency list: " + classroomAdjacencyList);
+
+
 
         ShortestPathService service = new ShortestPathService(classroomAdjacencyList);
 
+
         List<String> path = service.findShortestPath("101", "105");
+
         System.out.println("Shortest path: " + path);
     }
 }
+
+
 
 
