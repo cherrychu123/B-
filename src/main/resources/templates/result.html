@@ -1,0 +1,39 @@
+<!-- results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最优路径结果</title>
+    <style>
+         #path-image {
+             max-width: 80%;
+             max-height: 80%;
+             width: auto;
+             height: auto;
+         }
+
+    #path-result {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="result-container">
+    <!-- 假设您有一张展示最优路径的图片 -->
+    <img id="path-image" th:src="@{/static/B-Building.jpg}" alt="最优路径图片" />
+    https://tse2-mm.cn.bing.net/th/id/OIP-C.FV3x4TEtn472LJGjAkzAVgHaHa?rs=1&pid=ImgDetMain
+
+    <div id="path-result">
+        <!-- 这里将显示计算出的最短路径结果 -->
+    </div>
+</div>
+<script>
+    document.getElementById('path-result').innerText =window.shortestPath;
+
+    console.log(window.shortestPath); // 在控制台打印最短路径
+</script>
+</body>
+</html>
+

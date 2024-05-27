@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -18,8 +17,8 @@ public class ShortestPathController {
     @Autowired
     private ShortestPathService shortestPathService;
 
-    @GetMapping("/shortestPath")
-    public List<String> getShortestPath(@RequestParam String startRoom, @RequestParam String endRoom) throws IOException {
-        return shortestPathService.findShortestPath(startRoom, endRoom);
+    @GetMapping("/shortest-path")
+    public Map<String, Object> getShortestPath(@RequestParam String endRoom) {
+        return shortestPathService.findShortestPathFromAnyEntrance(endRoom);
     }
 }

@@ -1,6 +1,64 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教室导航系统</title>
+
+    <!--在加载 API 前设置安全密钥-->
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode: "9600ca09852bab6189ad42d763c3dd0b",
+        };
+    </script>
+
+    <!-- 引入高德地图 API -->
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=208ff94fe99e8c75a3698d5175fcb54d&plugin=AMap.Walking"></script>
+
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+</head>
+
 <body>
-<h1>hello word!!!</h1>
-<p>this is a html page</p>
+<!-- 用户输入界面 -->
+<div class="input-container">
+    <select id="dormitory-area">
+        <option value="" disabled selected>选择宿舍区</option>
+        <option value="海棠5号楼">海棠5号楼</option>
+        <option value="海棠6号楼">海棠6号楼</option>
+        <option value="海棠7号楼">海棠7号楼</option>
+        <option value="海棠8号楼">海棠8号楼</option>
+        <option value="丁香13号楼">丁香13号楼</option>
+        <option value="丁香14号楼">丁香14号楼</option>
+        <option value="竹园1号楼">竹园1号楼</option>
+        <option value="竹园2号楼">竹园2号楼</option>
+        <option value="竹园3号楼">竹园3号楼</option>
+        <option value="竹园4号楼">竹园4号楼</option>
+    </select>
+
+    <input type="text" id="target-room" placeholder="输入目标教室">
+    <button id="route-btn">规划路线</button>
+    <button onclick="window.location.href = '/result'">查看最短路径结果</button>
+
+</div>
+
+<!-- 地图和结果面板容器 -->
+<div id="map-container">
+    <!-- 地图容器 -->
+    <div id="container"></div>
+
+    <!-- 路径规划结果显示面板 -->
+    <div id="panel"></div>
+</div>
+
+<script>
+    var shortestPath  /* 这里是你的最短路径数据 */;
+</script>
+
+<!-- 引入绘制路线的 JavaScript 文件 -->
+<script th:src="@{/js/draw.js}"></script>
+
+
 </body>
 </html>
