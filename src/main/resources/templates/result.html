@@ -6,32 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>最优路径结果</title>
     <style>
-         #path-image {
-             max-width: 80%;
-             max-height: 80%;
-             width: auto;
-             height: auto;
-         }
+        #path-image {
+            width: 70%;
+            height: auto;
+            display: block; /* 让图片成为块级元素 */
+            margin: 0 auto; /* 设置左右外边距为auto，实现水平居中 */
+        }
 
-    #path-result {
+        #path-result {
             margin-top: 20px;
             text-align: center;
         }
+
     </style>
 </head>
 <body>
 <div id="result-container">
     <!-- 假设您有一张展示最优路径的图片 -->
-    <img id="path-image" th:src="@{/static/B-Building.jpg}" alt="最优路径图片" />
+    <img id="path-image" th:src="@{/image/B-Building.jpg}" alt="最优路径图片" />
 
     <div id="path-result">
         <!-- 这里将显示计算出的最短路径结果 -->
     </div>
 </div>
 <script>
-    document.getElementById('path-result').innerText =window.shortestPath;
-
-    console.log(window.shortestPath); // 在控制台打印最短路径
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const path = JSON.parse(localStorage.getItem('shortestPath'));
+        if (path) {
+            document.getElementById('path-result').innerText = path.join(' -> ');
+            console.log('Shortest Path:', path);
+        } else {
+            document.getElementById('path-result').innerText = '没有找到路径数据';
+        }
+    });
 </script>
 </body>
 </html>

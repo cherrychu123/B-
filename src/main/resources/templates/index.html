@@ -52,13 +52,18 @@
     <div id="panel"></div>
 </div>
 
-<script>
-    var shortestPath  /* 这里是你的最短路径数据 */;
-</script>
 
 <!-- 引入绘制路线的 JavaScript 文件 -->
 <script th:src="@{/js/draw.js}"></script>
 
+<script> // 绑定第二个按钮点击事件来跳转至 result 页面
+document.addEventListener('DOMContentLoaded', function() {
+    var resultBtn = document.getElementById('result-btn');
+    if (resultBtn) {
+        resultBtn.onclick = redirectToResultPage;
+    }
+});
+</script>
 
 </body>
 </html>

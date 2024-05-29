@@ -51,7 +51,7 @@ points.forEach(function (point) {
     "入口8": [108.831059, 34.126161]
   };
 
-
+  var shortestPath;
   // 步行导航
   var walking = new AMap.Walking({
     map: map,
@@ -74,6 +74,8 @@ points.forEach(function (point) {
           var path = data.path;
           console.log("Best entrance:", bestEntrance);
           console.log("Shortest path:", path);
+          shortestPath = path;
+          console.log(" path:", shortestPath);
 
           if (path.length > 0) {
             // 确保bestEntrance是一个坐标数组
@@ -81,6 +83,8 @@ points.forEach(function (point) {
               walking.search(dormitoryCoordinates[dormitoryArea], entranceCoordinates[bestEntrance], function(status, result) {
                 if (status === 'complete') {
                   console.log('路线规划成功', result);
+                  localStorage.setItem('shortestPath', JSON.stringify(path));
+                  //window.location.href = 'results.html';
                   shortestPath =path;
                 } else {
                   console.error('路线规划失败', result);
